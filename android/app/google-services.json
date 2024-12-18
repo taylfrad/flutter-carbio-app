@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "753841554012",
+    "project_id": "carbio-5f168",
+    "storage_bucket": "carbio-5f168.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753841554012:android:8aec564be74661b35b5c99",
+        "android_client_info": {
+          "package_name": "carbio.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKvMCU0eSv3aUVaicGEB0X6yb88OdtKFE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

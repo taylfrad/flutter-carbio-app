@@ -36,10 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   
   # Following adds support for future endeavors 
-  http: ^1.1.0        # For API communication
-  image_picker: ^1.0.7 # To allow image selection or camera usage
+  image_picker: ^0.8.7+4
+  http: ^1.1.0
   firebase_core: ^2.0.0
-  firebase_auth: ^4.0.0  # Optional for user authentication
+  cloud_firestore: ^4.0.0
 
 dev_dependencies:
   flutter_test:
