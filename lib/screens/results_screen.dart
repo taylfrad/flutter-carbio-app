@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class ResultsScreen extends StatelessWidget {
   final Map<String, dynamic>? data;
-  ResultsScreen({required this.data});
+  const ResultsScreen({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
     if (data == null || data!['error'] != null) {
       return Scaffold(
         appBar: AppBar(title: Text('Results')),
-        body: Center(child: Text('No data found or error occurred')),
+        body: Center(child: Text('No data found or error occurred. Check connection or try again.')),
       );
     }
 

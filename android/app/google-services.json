@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:753841554012:android:8aec564be74661b35b5c99",
         "android_client_info": {
-          "package_name": "carbio.app"
+          "package_name": "com.example.carbio"
         }
       },
       "oauth_client": [],

@@ -6,6 +6,8 @@ import '../services/api_services.dart';
 import 'results_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -14,15 +16,15 @@ class _HomeScreenState extends State<HomeScreen> {
   File? _image;
 
   Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? pickedFile = await _picker.pickImage(source: ImageSource.camera);
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
       });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No image selected.'))
+        SnackBar(content: Text('No image selected. Please try again.')),
       );
     }
   }
@@ -30,12 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _analyzeImage() async {
     if (_image == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please capture an image first.'))
+        SnackBar(content: Text('Please capture an image first.')),
       );
       return;
     }
 
-    // Show a loading indicator while we analyze the image
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -43,10 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
 
     final result = await ApiService.analyzeImage(_image!);
-    Navigator.pop(context); // Close the loading dialog
+    Navigator.pop(context);
 
     if (result != null && result['foodName'] != null) {
-      // Store data in Firestore
       await FirebaseFirestore.instance.collection('meals').add({
         'foodName': result['foodName'],
         'carbs': result['carbs'],
@@ -55,14 +55,13 @@ class _HomeScreenState extends State<HomeScreen> {
         'timestamp': DateTime.now().toUtc(),
       });
 
-      // Navigate to the results screen to show nutritional info
       Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => ResultsScreen(data: result)),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('No data received or an error occurred.'))
+        SnackBar(content: Text('No data received or an error occurred. Try again.')),
       );
     }
   }
@@ -85,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text('Capture Image'),
           ),
           ElevatedButton(
-            onPressed: _analyzeImage,
+            onPressed: _image == null ? null : _analyzeImage,
             child: Text('Analyze Image'),
           ),
         ],
